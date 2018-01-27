@@ -1,0 +1,20 @@
+{
+  "name": "carryon",
+  "description": "Coming soon...",
+  "author": "Ian Severance <hi@ianseverance.com>",
+  "license": "MIT",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianseverance/carryon.git"
+  },
+  "keywords": [
+    "barbershop"
+  ],
+  "bugs": {
+    "url": "https://github.com/ianseverance/carryon/issues"
+  },
+  "homepage": "https://github.com/ianseverance/carryon#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}

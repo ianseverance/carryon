@@ -1,0 +1,12 @@
+# Project dependencies
+node_modules/
+*.lock
+
+# Build
+dist/
+
+# Other
+.DS_Store
+*.log
+*.cache
+.npmrc
