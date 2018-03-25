@@ -4,7 +4,20 @@
   "description": "Coming soon...",
   "author": "Ian Severance <hi@ianseverance.com>",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "run start",
+    "build": "run build",
+    "test": "run test",
+    "clean": "run clean",
+    "ci:build": "yarn build",
+    "ci:test": "yarn test",
+    "ci:clean": "yarn clean",
+    "ci:lint": "run lint",
+    "ci:pre_publish": "run pre_publish",
+    "ci:publish": "run publish",
+    "ci:version": "run version",
+    "ci:release": "run release"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ianseverance/carryon.git"
