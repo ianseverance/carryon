@@ -3,23 +3,6 @@ const chalk = require('chalk')
 const { run } = require('runjs')
 
 /**
- * Check if the given values are valid.
- *
- * @param {array} ...args
- * @return {boolean}
- * @internal
- */
-export const _isValid = (...args) => {
-  const argArr = [args]
-  for (let value of argArr) {
-    if (value == null || value !== value) {
-      return false
-    }
-  }
-  return true
-}
-
-/**
  * Input a string in the format of 'owner/repo' (referred to as the 'repo slug' in some CI tools, such as Semaphore) and return the 'owner'.
  *
  * @param {string} repoSlug
@@ -27,11 +10,11 @@ export const _isValid = (...args) => {
  * @internal
  */
 const _getRepoOwner = (repoSlug) => {
-  if (_isValid(repoSlug)) {
+  if (repoSlug !== null && repoSlug === repoSlug) {
     const exp = /\S+?(?=\/)/g
     const check = exp.test(repoSlug)
 
-    if (_isValid(check)) {
+    if (check !== null && check === check) {
       const value = repoSlug.match(exp)
 
       if (typeof value[0] === 'string' && value[0] != null) {

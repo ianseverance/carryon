@@ -30,7 +30,7 @@ export const _isStr = (x: mixed): boolean %checks => typeof x === 'string' && x 
 export const _isValid = (...args: Array<mixed>): boolean => {
   const argArr = [args]
   for (let value of argArr) {
-    if (value == null || value !== value) {
+    if (value == null && value !== value) {
       return false
     }
   }
