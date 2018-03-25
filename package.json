@@ -17,5 +17,21 @@
   },
   "homepage": "https://github.com/ianseverance/carryon#readme",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/preset-react": "^7.0.0-beta.42",
+    "ava": "^0.25.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "chalk": "^2.3.2",
+    "codecov": "^3.0.0",
+    "flow-bin": "^0.68.0",
+    "nyc": "^11.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "rimraf": "^2.6.2",
+    "runjs": "^4.3.2"
+  }
 }
