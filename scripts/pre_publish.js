@@ -2,7 +2,22 @@ const axios = require('axios')
 const chalk = require('chalk')
 const { run } = require('runjs')
 
-const { _isStr, _isValid } = require('../src/utils/objects')
+/**
+ * Check if the given values are valid.
+ *
+ * @param {array} ...args
+ * @return {boolean}
+ * @internal
+ */
+export const _isValid = (...args) => {
+  const argArr = [args]
+  for (let value of argArr) {
+    if (value == null || value !== value) {
+      return false
+    }
+  }
+  return true
+}
 
 /**
  * Input a string in the format of 'owner/repo' (referred to as the 'repo slug' in some CI tools, such as Semaphore) and return the 'owner'.
@@ -11,26 +26,30 @@ const { _isStr, _isValid } = require('../src/utils/objects')
  * @return {string}
  * @internal
  */
-const _getRepoOwner = (repoSlug: mixed): ?string => {
-  const exp = /\S+?(?=\/)/g
-  const check = exp.test(repoSlug)
+const _getRepoOwner = (repoSlug) => {
+  if (_isValid(repoSlug)) {
+    const exp = /\S+?(?=\/)/g
+    const check = exp.test(repoSlug)
 
-  if (_isValid(check)) {
-    const value = repoSlug.match(exp)
+    if (_isValid(check)) {
+      const value = repoSlug.match(exp)
 
-    if (_isStr(value[0])) {
-      const comp = value[0]
+      if (typeof value[0] === 'string' && value[0] != null) {
+        const comp = value[0]
 
-      return comp
+        return comp
+      } else {
+        throw new Error(`The parameters you provided are invalid.
+          You provided:
+          @param 'repoSlug' = ${repoSlug} (must be a valid repo slug)`)
+      }
     } else {
       throw new Error(`The parameters you provided are invalid.
         You provided:
-        @param 'repoSlug' = ${repoSlug} (must be a valid repo slug)`)
+        @param 'repoSlug' = ${typeof repoSlug} (must be string)`)
     }
   } else {
-    throw new Error(`The parameters you provided are invalid.
-      You provided:
-      @param 'repoSlug' = ${typeof repoSlug} (must be string)`)
+    throw new Error(`Please provide the 'repoSlug' argument.`)
   }
 }
 
@@ -45,7 +64,7 @@ const _getRepoOwner = (repoSlug: mixed): ?string => {
  * @return {Object}
  * @internal
  */
-const _getGitPullRequests = (apiToken: string, repoOwner: string, repoName: string, branchName: string): Object => {
+const _getGitPullRequests = (apiToken, repoOwner, repoName, branchName) => {
   return axios({
     method: 'post',
     url: 'https://api.github.com/graphql',
