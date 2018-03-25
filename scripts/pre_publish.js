@@ -78,8 +78,15 @@ async function pre_publish(apiKey, repoSlug, repoName, branch) {
   console.log('💨' + '  ' + chalk.cyan('Publishing unreleased changes to changelog...'))
 
   const repoOwner = _getRepoOwner(repoSlug)
-  let value = await _getGitPullRequests(apiKey, repoOwner, repoName, branch)
-  const pullRequests = value.data.repository.pullRequests.nodes
+  let value = await _getGitPullRequests(apiKey, repoOwner, repoName, branch).catch(error => console.log(error))
+  
+  let pullRequests
+
+  try {
+    pullRequests = value.data.repository.pullRequests.nodes
+  } catch(error) {
+    console.log(error)
+  }
 
   console.log(JSON.stringify(value.data))
 }
