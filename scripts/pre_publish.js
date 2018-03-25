@@ -79,16 +79,8 @@ async function pre_publish(apiKey, repoSlug, repoName, branch) {
 
   const repoOwner = _getRepoOwner(repoSlug)
   let value = await _getGitPullRequests(apiKey, repoOwner, repoName, branch).catch(error => console.log(error))
-  
-  let pullRequests
 
-  try {
-    pullRequests = value.data.repository.pullRequests.nodes
-  } catch(error) {
-    console.log(error)
-  }
-
-  console.log(JSON.stringify(value.data))
+  console.log(JSON.stringify(value.data.repository.pullRequests.nodes))
 }
 
 module.exports = {
