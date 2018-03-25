@@ -4,17 +4,29 @@ export const _isArr = (x: mixed): boolean %checks => Array.isArray(x)
 export const _isBool = (x: mixed): boolean %checks => typeof x === 'boolean'
 export const _isNeg = (x: number): boolean %checks => x < 0
 
-// Using the `Number.isNaN()` method instead of the global `isNaN()` method
-// because the global method has conversion issues.
-//
-// See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN
+/**
+ * Using the `Number.isNaN()` method instead of the global `isNaN()` method
+ * because the global method has conversion issues.
+ *
+ * See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN
+ *
+ * @param {mixed} x
+ * @return {boolean}
+ * @internal
+ */
 export const _isNum = (x: mixed): boolean %checks =>
   typeof x === 'number' && !Number.isNaN(x)
+
 export const _isNumOrStr = (x: mixed): boolean %checks => _isNum(x) || _isStr(x)
 export const _isStr = (x: mixed): boolean %checks => typeof x === 'string' && x != null
 
-// @params `...args` = array
-// @return = boolean
+/**
+ * Check if the given values are valid.
+ *
+ * @param {array} ...args
+ * @return {boolean}
+ * @internal
+ */
 export const _isValid = (...args: Array<mixed>): boolean => {
   const argArr = [args]
   for (let value of argArr) {
@@ -25,12 +37,18 @@ export const _isValid = (...args: Array<mixed>): boolean => {
   return true
 }
 
-// Filter `value` for only allowed CSS values (which inlcudes negative values)
-// and units
-//
-// Note, this expression does not allow:
-// 1. Math operations
-// 2. Binary, octal or hexadecimal form numbers
+/**
+ * Filter `value` for only allowed CSS values (which inlcudes negative values)
+ * and units.
+ *
+ * Note, this expression does not allow:
+ * 1. Math operations
+ * 2. Binary, octal or hexadecimal form numbers
+ *
+ * @param {mixed} value
+ * @return {string|void}
+ * @internal
+ */
 export const _isValidUnit = (value: mixed): ?string => {
   if (_isStr(value)) {
     const val: string = value
